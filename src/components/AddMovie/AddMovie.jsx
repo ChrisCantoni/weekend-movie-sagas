@@ -1,29 +1,40 @@
 import react, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 
 
 function AddMovie() {
 
-let [newTitle, setTitle] = useState('');
-let [newImage, setImage] = useState('');
-let [newDesc, setDesc] = useState('');
+    const dispatch = useDispatch();
 
-const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-}
+    let [newMovie, setNewMovie] = useState({title: '', poster: '', description: ''});
+    let [newImage, setImage] = useState('');
+    let [newDesc, setDesc] = useState('');
+    let [newGenre, setGenre] = useState('');
 
-const handleImageChange = (event) => {
-    setImage(event.target.value)
-}
+    const handleTitleChange = (event) => {
+        setNewMovie({...newMovie, title: event.target.value})
+    }
 
-const handleDescChange = (event) => {
-    setDesc(event.target.value)
-}
+    const handleImageChange = (event) => {
+        setNewMovie({...newMovie, poster: event.target.value})
+    }
+
+    const handleDescChange = (event) => {
+        setNewMovie({...newMovie, description: event.target.value})
+    }
+
+    // const handleGenreChange = (event) => {
+    //     setNewMovie({...newMovie, genre: event.target.value})
+    // }
 
 
-const addNewMovie = () => {
-
-    // Here's where we'll send the new info to server
-} 
+    const addNewMovie = () => {
+        event.preventDefault();
+        console.log(newMovie);
+        // Sending the new movie to the Saga that will send to DB
+        dispatch({type:'ADD_NEW_MOVIE', payload: newMovie})
+        setNewMovie({title: '', poster: '', description: ''})
+    } 
 
 // ! Axios GET for genres and then use a .map to list them!
 
@@ -31,19 +42,26 @@ const addNewMovie = () => {
         <div>
             <form onSubmit={addNewMovie}>
                 <label>Movie Title:</label>
-                <input value={newTitle} onChange={handleTitleChange}/>
+                <input value={newMovie.title} onChange={handleTitleChange}/>
+                <br/>
                 <label>Movie Poster URL:</label>
-                <input value={newImage} onChange={handleImageChange}/>
+                <input value={newMovie.poster} onChange={handleImageChange}/>
+                <br/>
                 <label>Movie Description:</label>
-                <input value={newDesc} onChange={handleDescChange}/>
+                <input value={newMovie.description} onChange={handleDescChange}/>
+                {/* <br/>
                 <label for="Genre">Genre:</label>
-                <select name="Genre">
+                <select onChange={handleGenreChange} name="Genre">
                     <option value="Adventure">Adventure</option>
                     <option value="Animated">Animated</option>
                     <option value="Biographical">Biographical</option>
                     <option value="Comedy">Comedy</option>
-                </select>
+                </select> */}
+                <br/>
+                <button type="submit">Submit new movie!</button>
             </form>
+
+            <p>{newMovie.title} - {newMovie.poster} - {newMovie.description}</p>
         </div>
         
     )
