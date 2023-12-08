@@ -6,7 +6,7 @@ function AddMovie() {
 
     const dispatch = useDispatch();
 
-    let [newMovie, setNewMovie] = useState({title: '', poster: '', description: ''});
+    let [newMovie, setNewMovie] = useState({title: '', poster: '', description: '', genre: ''});
     let [newImage, setImage] = useState('');
     let [newDesc, setDesc] = useState('');
     let [newGenre, setGenre] = useState('');
@@ -23,9 +23,10 @@ function AddMovie() {
         setNewMovie({...newMovie, description: event.target.value})
     }
 
-    // const handleGenreChange = (event) => {
-    //     setNewMovie({...newMovie, genre: event.target.value})
-    // }
+    const handleGenreChange = (event) => {
+        setNewMovie({...newMovie, genre: event.target.value})
+        console.log(newMovie)
+    }
 
 
     const addNewMovie = () => {
@@ -49,14 +50,14 @@ function AddMovie() {
                 <br/>
                 <label>Movie Description:</label>
                 <input value={newMovie.description} onChange={handleDescChange}/>
-                {/* <br/>
+                <br/>
                 <label for="Genre">Genre:</label>
                 <select onChange={handleGenreChange} name="Genre">
                     <option value="Adventure">Adventure</option>
                     <option value="Animated">Animated</option>
                     <option value="Biographical">Biographical</option>
                     <option value="Comedy">Comedy</option>
-                </select> */}
+                </select>
                 <br/>
                 <button type="submit">Submit new movie!</button>
             </form>

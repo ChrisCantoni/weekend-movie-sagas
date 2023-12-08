@@ -34,7 +34,7 @@ function Details() {
             <ul>Genre: {genreDetails.map((details, i) => {
                 return <li key={i}>{details.name}</li>
             })}</ul>
-        <Link to={'/'}><button onClick={handleClick}>Go Back</button></Link>
+        <Link to={'/'}><button onClick={handleClick}>Back to list</button></Link>
         </div>
     )
 }
