@@ -18,6 +18,13 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // GET route for details of each movie
+  const queryText = `SELECT * FROM "movies" WHERE "id" = ${req.params.id};`;
+  pool.query(queryText).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log('Error getting details', error);
+    res.sendStatus(500);
+  })
 })
 
 router.post('/', (req, res) => {
