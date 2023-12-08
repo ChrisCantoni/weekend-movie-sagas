@@ -9,21 +9,33 @@ function Details() {
 
     const movieDetails = useSelector(store => store.movieDetails);
 
+    const genreDetails = useSelector(store => store.genreDetails);
+
     function handleClick() {
-        console.log(movieDetails[0])
+        //Dispatch to empty the stored details
+        console.log(movieDetails)
+        console.log(genreDetails);
     }
 
 
     return (
-        <>
+        <div>
         <h1> Here are your movie details </h1>
-        {JSON.stringify(movieDetails)}
-        <button onClick={handleClick}>Click</button>
-        <h2>{movieDetails[0].title}</h2>
-        <img src={movieDetails[0].poster}/>
-        <p>{movieDetails[0].description}</p>
-        <Link to={'/'}><button>Go Back</button></Link>
-        </>
+
+        {movieDetails.map((movie) => {
+            return (
+                <div key={movie.id}>
+                <h2>{movie.title}</h2>
+                <img src={movie.poster}/>
+                <p>{movie.description}</p>
+                </div>
+            )
+        })}
+            <ul>Genre: {genreDetails.map((details, i) => {
+                return <li key={i}>{details.name}</li>
+            })}</ul>
+        <Link to={'/'}><button onClick={handleClick}>Go Back</button></Link>
+        </div>
     )
 }
 

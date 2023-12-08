@@ -13,12 +13,12 @@ function MovieList() {
     }, []);
 
     function handleClick(event) {
-        console.log('ID IS', event.target.parentElement.parentElement.id);
         let movieID = event.target.parentElement.parentElement.id;
         // You make the details in redux but move to a new page
        const action = {type: 'FETCH_MOVIE_DETAILS', payload: movieID};
-       console.log('THE ACTION IS', action);
         dispatch(action);
+        const genreAction = {type: 'FETCH_GENRE_DETAILS', payload: movieID};
+        dispatch(genreAction);
     }
 
     return (
