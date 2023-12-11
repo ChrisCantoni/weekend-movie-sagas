@@ -32,7 +32,7 @@ function MovieList() {
     return (
         <main>
             <h1>Movie List</h1>
-            <Link to='/add'><button>Add Movie</button></Link>
+            <Link to='/add'><Button variant="contained">Add Movie</Button></Link>
             <section className="movies">
                 {movies.map(movie => {
                     return (

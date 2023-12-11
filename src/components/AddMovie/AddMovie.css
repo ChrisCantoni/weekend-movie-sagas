@@ -5,3 +5,17 @@
 .MuiTextField-root {
     background-color: white;
 }
+
+.addButtons {
+    margin: 10px;
+    padding: 10px;
+    padding-bottom: 50px;
+}
+
+.divider {
+    width: 10px;
+    margin: 10px;
+    height: auto;
+    display: inline-block;
+}
+
