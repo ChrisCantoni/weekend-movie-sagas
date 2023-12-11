@@ -1,10 +1,14 @@
-import react, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import react, {useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import TextField from '@mui/material/TextField';
+import './AddMovie.css';
 
 
 function AddMovie() {
 
     const dispatch = useDispatch();
+
+    const genres = useSelector(store => store.genres);
 
     let [newMovie, setNewMovie] = useState({title: '', poster: '', description: '', genre: ''});
     let [newImage, setImage] = useState('');
@@ -28,6 +32,10 @@ function AddMovie() {
         console.log(newMovie)
     }
 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_ALL_GENRES' });
+    }, []);
+
 
     const addNewMovie = () => {
         event.preventDefault();
@@ -40,7 +48,7 @@ function AddMovie() {
 // ! Axios GET for genres and then use a .map to list them!
 
     return (
-        <div>
+        <div className="addMovie">
             <form onSubmit={addNewMovie}>
                 <label>Movie Title:</label>
                 <input value={newMovie.title} onChange={handleTitleChange}/>
@@ -49,20 +57,17 @@ function AddMovie() {
                 <input value={newMovie.poster} onChange={handleImageChange}/>
                 <br/>
                 <label>Movie Description:</label>
-                <input value={newMovie.description} onChange={handleDescChange}/>
+                <TextField sx={{width: 400}} variant="filled" value={newMovie.description} onChange={handleDescChange}/>
                 <br/>
-                <label for="Genre">Genre:</label>
-                <select onChange={handleGenreChange} name="Genre">
-                    <option value="Adventure">Adventure</option>
-                    <option value="Animated">Animated</option>
-                    <option value="Biographical">Biographical</option>
-                    <option value="Comedy">Comedy</option>
+                <select onChange={handleGenreChange} name="Genre" value="Select Genre">
+                    <option value='' selected hidden>Choose Genre</option>
+                    {genres.map((genre, i) => {
+                        return <option key={i} value={genre.name}>{genre.name}</option>
+                    })}
                 </select>
                 <br/>
                 <button type="submit">Submit new movie!</button>
             </form>
-
-            <p>{newMovie.title} - {newMovie.poster} - {newMovie.description}</p>
         </div>
         
     )

@@ -2,6 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 function MovieList() {
 
@@ -13,8 +20,9 @@ function MovieList() {
     }, []);
 
     function handleClick(event) {
-        let movieID = event.target.parentElement.parentElement.id;
-        // You make the details in redux but move to a new page
+        let movieID = event
+        console.log("MovieID is", movieID)
+        //You make the details in redux but move to a new page
        const action = {type: 'FETCH_MOVIE_DETAILS', payload: movieID};
         dispatch(action);
         const genreAction = {type: 'FETCH_GENRE_DETAILS', payload: movieID};
@@ -23,14 +31,32 @@ function MovieList() {
 
     return (
         <main>
-            <h1>MovieList</h1>
+            <h1>Movie List</h1>
             <Link to='/add'><button>Add Movie</button></Link>
             <section className="movies">
                 {movies.map(movie => {
                     return (
                         <div key={movie.id} id={movie.id}>
-                            <h3>{movie.title}</h3>
-                            <Link to={`/movies/${movie.id}`}><img onClick={() => handleClick(event)} src={movie.poster} alt={movie.title}/></Link>
+                            <Card className='cardContent' style={{backgroundColor: '#AEC3B0'}} sx={{margin: 2, minWidth: 185, maxWidth: 185, minHeight: 420, maxHeight: 450}}>
+                                <CardActionArea component={Link} to={`/details/${movie.id}`} onClick={() => handleClick(movie.id)}>
+                                    <CardMedia sx={{height: 274}} image={movie.poster} title={movie.title}/>
+                                    <Link to={`/details/${movie.id}`}/>
+                                    <CardContent>
+                                        <Typography variant="h6">
+                                            {movie.title}
+                                        </Typography>
+                                        {/* <Typography variant="h5">
+                                            {movie.genre}
+                                        </Typography> */}
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions className="detailsButton" style={{justifyItems: 'center', justifyContent: 'center', alignContent: 'space-evenly'}}>
+                                <Link to={`/details/${movie.id}`}><Button onClick={() => handleClick(movie.id)} size="small" variant="contained">More Details</Button></Link>
+                                </CardActions>
+                                
+                            </Card>
+                            {/* <h3>{movie.title}</h3>
+                            <Link to={`/movies/${movie.id}`}><img onClick={() => handleClick(event)} src={movie.poster} alt={movie.title}/></Link> */}
                         </div>
                     );
                 })}
