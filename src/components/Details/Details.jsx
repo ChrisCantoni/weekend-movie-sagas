@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
-import react from 'react';
-import { Link } from 'react-router-dom';
+import react, {useEffect} from 'react';
+import { Link, useParams } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Box } from '@mui/material';
 import '../MovieList/MovieList.css';
@@ -9,6 +9,7 @@ import '../MovieList/MovieList.css';
 function Details() {
 
     const dispatch = useDispatch();
+    const { id } = useParams();
 
     const movieDetails = useSelector(store => store.movieDetails);
 
@@ -21,6 +22,14 @@ function Details() {
         console.log(genreDetails);
     }
 
+    function refreshPage() {
+        dispatch({type: 'FETCH_MOVIE_DETAILS', payload: id});
+        dispatch({type: 'FETCH_GENRE_DETAILS', payload: id});
+    }
+
+    useEffect(() => {
+        refreshPage()
+    }, []);
 
     return (
         <div className='detailsPage'>
