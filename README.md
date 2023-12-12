@@ -14,13 +14,13 @@ Material UI cards and buttons have been included to improve the user experience.
 
 ### Screenshots
 #### The main page
-![mainscreen.png]('A display of all the movies in the database.')
+!['A display of all the movies in the database.'](./public/images/mainscreen.png)
 
 #### The Details page
-![moviedetails.png]('A display of a single movie with title, poster, description and genre included.')
+!['A display of a single movie with title, poster, description and genre included.'](./public/images/moviedetails.png)
 
 #### Adding a movie
-![addmoviescreen.png]('A form for adding a movie to the database.')
+!['A form for adding a movie to the database.'](./public/images/addmoviescreen.png)
 
 ### Skills Practiced
 - Javascript
