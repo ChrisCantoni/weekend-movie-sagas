@@ -19,9 +19,9 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    // handleClick runs on both the movie picture and on the button below
     function handleClick(event) {
         let movieID = event
-        console.log("MovieID is", movieID)
         //You make the details in redux but move to a new page
        const action = {type: 'FETCH_MOVIE_DETAILS', payload: movieID};
         dispatch(action);
@@ -45,9 +45,6 @@ function MovieList() {
                                         <Typography variant="h6">
                                             {movie.title}
                                         </Typography>
-                                        {/* <Typography variant="h5">
-                                            {movie.genre}
-                                        </Typography> */}
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions className="detailsButton" style={{justifyItems: 'center', justifyContent: 'center', alignContent: 'space-evenly'}}>
@@ -55,8 +52,6 @@ function MovieList() {
                                 </CardActions>
                                 
                             </Card>
-                            {/* <h3>{movie.title}</h3>
-                            <Link to={`/movies/${movie.id}`}><img onClick={() => handleClick(event)} src={movie.poster} alt={movie.title}/></Link> */}
                         </div>
                     );
                 })}

@@ -18,10 +18,8 @@ function AddMovie() {
     const genres = useSelector(store => store.genres);
 
     let [newMovie, setNewMovie] = useState({title: '', poster: '', description: '', genre: ''});
-    let [newImage, setImage] = useState('');
-    let [newDesc, setDesc] = useState('');
-    let [newGenre, setGenre] = useState('');
 
+    // Functions to set the values of the new movie.
     const handleTitleChange = (event) => {
         setNewMovie({...newMovie, title: event.target.value})
     }
@@ -46,6 +44,7 @@ function AddMovie() {
 
     const addNewMovie = () => {
         event.preventDefault();
+        // Confirm all info is added before allowing a submit to proceed.
         if (newMovie.title == '' || newMovie.poster == '' || newMovie.description == '' || newMovie.genre == '') {
             Swal.fire({
                 icon: "error",
@@ -60,12 +59,11 @@ function AddMovie() {
         history.push('/');
     }} 
 
+    // Empties the newMovie store and returns to the main page
     const cancelNewMovie = () => {
         setNewMovie({title: '', poster: '', description: ''})
         history.push('/'); 
     }
-
-// ! Axios GET for genres and then use a .map to list them!
 
     return (
         <div className="addMovie">

@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
     console.log(req.body.genre);
     
     const createdMovieId = result.rows[0].id
-
+    // Added an additional query to ensure "movies_genres" can match both movie and genre
     const getGenreId = `
     SELECT "id" FROM "genres" 
     WHERE "name" LIKE '%'||$1||'%';`;

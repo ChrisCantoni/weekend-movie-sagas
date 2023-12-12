@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// Getting the genre(s) for a specific movie
 router.get('/:id', (req, res) => {
   const genreID = req.params.id
   const queryText = `SELECT "genres"."name" FROM "genres"
@@ -18,6 +19,7 @@ router.get('/:id', (req, res) => {
   })
 });
 
+// Getting all genres
 router.get('/', (req, res) => {
   const queryText = `SELECT "genres"."name" FROM "genres";`;
   pool.query(queryText).then((result) => {
